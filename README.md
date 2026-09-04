@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=husamettinulutas.oneprovider-maestro"><img src="https://img.shields.io/visual-studio-marketplace/v/husamettinulutas.oneprovider-maestro?color=E61919&label=marketplace" alt="Marketplace version" /></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=husamettinulutas.oneprovider-maestro"><img src="https://img.shields.io/visual-studio-marketplace/i/husamettinulutas.oneprovider-maestro?color=3FB950&label=installs" alt="Installs" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=husamettinulutas.oneprovider-maestro"><img src="https://vsmarketplacebadges.dev/version-short/husamettinulutas.oneprovider-maestro.svg?color=E61919&label=marketplace" alt="Marketplace version" /></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=husamettinulutas.oneprovider-maestro"><img src="https://vsmarketplacebadges.dev/installs-short/husamettinulutas.oneprovider-maestro.svg?color=3FB950&label=installs" alt="Installs" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-BC8CFF" alt="MIT license" /></a>
 </p>
 
@@ -215,20 +215,32 @@ A gap between the two is lag, not a discrepancy.
 
 </details>
 
-## Restoring
+## Restoring, and uninstalling cleanly
 
-Every integration snapshots the pre-Maestro state on the **first** apply, so switching models repeatedly never loses the original. Press **Use default** in an agent's tab, or run:
+Every integration snapshots the pre-Maestro state on the **first** apply, so switching models repeatedly never loses the original, and a `.maestro-backup` copy of every file is written before the first modification.
 
-- `OneProvider Maestro: Restore Claude Code Defaults (Anthropic)`
-- `OneProvider Maestro: Restore Codex Defaults (OpenAI)`
+**One agent at a time** — press **Use default** in its tab, or run `OneProvider Maestro: Restore Claude Code Defaults (Anthropic)` / `Restore Codex Defaults (OpenAI)`.
 
-Restore also removes the `ONEPROVIDER_API_KEY` user variable if Maestro created it — leaving a live key in the user environment would be a credential leak.
+**Everything at once** — `OneProvider Maestro: Restore All Agents & Clear Settings`. This hands all three agents back, empties the Copilot model list, and removes the VS Code settings the extension wrote (`claudeCode.environmentVariables`, `claudeCode.disableLoginPrompt`, and `chat.byokUtilityModelDefault` if Maestro was the one that set it).
 
-> ⚠️ **Uninstalling the extension does not undo any of this.** VS Code runs no code on uninstall. Restore first if you want the agents back on their own providers, or restore the `.maestro-backup` files by hand.
+**Uninstalling** runs a `vscode:uninstall` hook the next time VS Code starts, which removes:
+
+- the `ANTHROPIC_*` / `CLAUDE_CODE_*` block from `~/.claude/settings.json`, putting back any value you had under those names beforehand,
+- the `[model_providers.oneprovider]` section and top-level model selection from `~/.codex/config.toml`, likewise restoring your own,
+- the `ONEPROVIDER_API_KEY` user environment variable on Windows,
+- its own `.maestro-backup` files, once their contents have been folded back in.
+
+Two things it deliberately does **not** touch:
+
+- **Your API key stays in SecretStorage**, so reinstalling does not mean typing it in again. Nothing outside the extension can read it; run `Restore All Agents & Clear Settings` first if you would rather it were gone with everything else.
+- **VS Code's own `settings.json`.** The hook is a bare Node process and VS Code may be holding that file in memory, so an edit from outside would just be written back over. Those keys are cleared by the restore commands instead — which is why running **Restore All** before uninstalling leaves the cleanest result.
+
+A custom `oneproviderMaestro.codex.configPath` is also unreachable from the hook (it lives in VS Code's settings), so a relocated Codex config has to be cleaned by restoring before you uninstall.
 
 ## Good to know
 
 - **Billing moves to OneProvider.** While an override is active, your Claude or ChatGPT subscription is not being used. Switching back to the default returns you to it.
+- **Uninstalling cleans up after itself**, but only on the next VS Code start — that is when VS Code runs uninstall hooks. See *Restoring, and uninstalling cleanly*.
 - **OneProvider keys are prepaid and can expire.** The Usage tab shows the real status the provider reports for your key, not just whether requests happen to be working right now.
 - **Model ids are flat slugs**, not `vendor/model`. Ported configs from other gateways will not work verbatim.
 - **Codex hides thinking steps for models whose upstream streams raw reasoning.** Codex renders reasoning *summaries* only; those models still think, and you are billed for it, but there is no event Codex will display.

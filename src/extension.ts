@@ -23,7 +23,9 @@ const PROVIDER_VENDOR_ID = 'oneprovider-maestro';
  * 'copilot-utility-small'" the first time it needs one. Only set when the user
  * has not configured it themselves.
  */
-async function ensureByokUtilityDefault(): Promise<void> {
+const BYOK_DEFAULT_SET_BY_US = 'maestro-set-byok-default';
+
+async function ensureByokUtilityDefault(state: vscode.Memento): Promise<void> {
   try {
     const config = vscode.workspace.getConfiguration();
     const inspected = config.inspect<string>('chat.byokUtilityModelDefault');
@@ -38,6 +40,7 @@ async function ensureByokUtilityDefault(): Promise<void> {
         'mainAgent',
         vscode.ConfigurationTarget.Global,
       );
+      await state.update(BYOK_DEFAULT_SET_BY_US, true);
       Logger.info("Set 'chat.byokUtilityModelDefault' to 'mainAgent'");
     }
   } catch (error) {
@@ -142,11 +145,68 @@ async function restoreAgentCommand(
   }
 }
 
+/**
+ * Hand every agent back to its own provider and drop the VS Code settings this
+ * extension wrote.
+ *
+ * The `vscode:uninstall` hook covers the files outside VS Code, but it runs as
+ * a bare Node process and cannot touch VS Code's own settings.json — VS Code
+ * may be holding it in memory and would write our edit straight back out. So
+ * those keys have to be cleaned while the extension is still running, which is
+ * what this command is for. The API key is deliberately left in SecretStorage:
+ * nothing outside the extension can read it, and keeping it means reinstalling
+ * does not mean typing it in again.
+ */
+async function restoreEverything(
+  integrations: AgentIntegration[],
+  chatProvider: OneProviderChatProvider,
+  state: vscode.Memento,
+): Promise<void> {
+  const failures: string[] = [];
+
+  for (const integration of integrations) {
+    try {
+      await integration.restore();
+    } catch (error) {
+      failures.push(`${integration.target}: ${error instanceof Error ? error.message : error}`);
+    }
+  }
+
+  try {
+    await chatProvider.clearSelection();
+  } catch (error) {
+    Logger.warn('Could not clear the Copilot model selection', error);
+  }
+
+  if (state.get<boolean>(BYOK_DEFAULT_SET_BY_US)) {
+    try {
+      await vscode.workspace
+        .getConfiguration()
+        .update('chat.byokUtilityModelDefault', undefined, vscode.ConfigurationTarget.Global);
+      await state.update(BYOK_DEFAULT_SET_BY_US, undefined);
+    } catch (error) {
+      Logger.warn('Could not clear chat.byokUtilityModelDefault', error);
+    }
+  }
+
+  if (failures.length > 0) {
+    vscode.window.showWarningMessage(
+      `OneProvider Maestro restored what it could. Still to check: ${failures.join('; ')}`,
+    );
+    return;
+  }
+  vscode.window.showInformationMessage(
+    'Every agent is back on its own model and this extension\'s VS Code settings are cleared. ' +
+      'Your API key is kept, so reinstalling will not ask for it again. ' +
+      'Uninstalling now leaves nothing behind.',
+  );
+}
+
 export function activate(context: vscode.ExtensionContext) {
   Logger.init();
   Logger.info('OneProvider Maestro activating...');
 
-  ensureByokUtilityDefault();
+  ensureByokUtilityDefault(context.globalState);
 
   const secrets = new SecretsManager(context.secrets);
   const apiClient = new OneProviderClient();
@@ -258,6 +318,10 @@ export function activate(context: vscode.ExtensionContext) {
     ),
     vscode.commands.registerCommand('oneproviderMaestro.codex.restore', () =>
       restoreAgentCommand(codex, 'Codex'),
+    ),
+
+    vscode.commands.registerCommand('oneproviderMaestro.restoreAll', () =>
+      restoreEverything(integrations, chatProvider, context.globalState),
     ),
 
     vscode.commands.registerCommand('oneproviderMaestro.showStatus', async () => {

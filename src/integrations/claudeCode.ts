@@ -6,6 +6,7 @@ import { AgentApplyOptions, AgentIntegration } from './agentIntegration';
 import { IntegrationStatus } from '../types/models';
 import { backupOnce, readJsonFile, sanitizeModelId, writeJsonFileAtomic } from './shared';
 import { Logger } from '../utils/logger';
+import { MANAGED_ENV_KEYS, clearClaudeCodeEnv } from './managedConfig';
 
 /**
  * OneProvider's Anthropic-native endpoint.
@@ -20,23 +21,6 @@ const ONEPROVIDER_HOST = 'oneprovider.dev';
 /** globalState key holding the pre-apply snapshot used by restore(). */
 const SNAPSHOT_KEY = 'maestro-claude-code-snapshot';
 
-/** The env vars Maestro manages inside Claude Code's settings "env" block. */
-const MANAGED_ENV_KEYS = [
-  'ANTHROPIC_BASE_URL',
-  'ANTHROPIC_API_KEY',
-  'ANTHROPIC_AUTH_TOKEN',
-  'ANTHROPIC_MODEL',
-  'ANTHROPIC_DEFAULT_OPUS_MODEL',
-  'ANTHROPIC_DEFAULT_SONNET_MODEL',
-  'ANTHROPIC_DEFAULT_HAIKU_MODEL',
-  'ANTHROPIC_SMALL_FAST_MODEL',
-  'CLAUDE_CODE_SUBAGENT_MODEL',
-  'CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC',
-  'CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS',
-  'CLAUDE_CODE_MAX_CONTEXT_TOKENS',
-  'CLAUDE_CODE_AUTO_COMPACT_WINDOW',
-  'CLAUDE_CODE_MAX_OUTPUT_TOKENS',
-] as const;
 
 interface ClaudeSnapshot {
   /** Settings file the env block was written to. */
@@ -317,19 +301,8 @@ export class ClaudeCodeIntegration implements AgentIntegration {
     }
 
     if (settings) {
-      if (settings.env) {
-        for (const key of MANAGED_ENV_KEYS) {
-          const previous = snapshot.previousEnv?.[key];
-          if (previous !== undefined) {
-            settings.env[key] = previous;
-          } else {
-            delete settings.env[key];
-          }
-        }
-        if (Object.keys(settings.env).length === 0) {
-          delete settings.env;
-        }
-      }
+      // Same function the uninstall hook calls, so the two cannot drift.
+      clearClaudeCodeEnv(settings, snapshot.previousEnv);
       if (snapshot.previousTopLevelModel !== undefined) {
         settings.model = snapshot.previousTopLevelModel;
       } else {

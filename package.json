@@ -100,6 +100,11 @@
         "icon": "$(discard)"
       },
       {
+        "command": "oneproviderMaestro.restoreAll",
+        "title": "OneProvider Maestro: Restore All Agents & Clear Settings",
+        "icon": "$(discard)"
+      },
+      {
         "command": "oneproviderMaestro.showStatus",
         "title": "OneProvider Maestro: Show Integration Status",
         "icon": "$(info)"
@@ -315,7 +320,8 @@
     "compile": "tsc --noEmit",
     "watch": "node esbuild.js --watch",
     "package": "npx @vscode/vsce package --no-dependencies",
-    "test": "npx --yes tsx --test src/__tests__/apiKeyUtils.test.ts src/__tests__/modelId.test.ts src/__tests__/reasoningEffort.test.ts src/__tests__/modelCatalog.test.ts src/__tests__/sessionUsage.test.ts"
+    "test": "npx --yes tsx --test src/__tests__/apiKeyUtils.test.ts src/__tests__/modelId.test.ts src/__tests__/reasoningEffort.test.ts src/__tests__/modelCatalog.test.ts src/__tests__/sessionUsage.test.ts src/__tests__/managedConfig.test.ts",
+    "vscode:uninstall": "node ./dist/uninstall.js"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

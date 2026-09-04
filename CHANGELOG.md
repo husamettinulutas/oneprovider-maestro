@@ -42,6 +42,12 @@ First release.
 - One affordance channel: every pressable control carries a resting keyline and answers the pointer in hazard red, and nothing else in the panel does — so "what can I press" has a single answer at a glance.
 - The wordmark is never abbreviated. Narrow widths give up the action labels and the revision tag before they give up "OneProvider".
 
+### Uninstall & restore
+- `vscode:uninstall` hook that cleans up on removal: the `ANTHROPIC_*` / `CLAUDE_CODE_*` block in Claude Code's settings, the `[model_providers.oneprovider]` section and model selection in Codex's `config.toml`, the `ONEPROVIDER_API_KEY` user variable on Windows, and its own `.maestro-backup` files — each reinstating whatever the user had under those names before. It runs as a bare Node process, so it carries no `vscode` import and never throws.
+- The API key is left in SecretStorage on uninstall, so reinstalling does not ask for it again. Nothing outside the extension can read it.
+- **Restore All Agents & Clear Settings** command for the part an uninstall hook cannot do: VS Code's own settings (`claudeCode.*`, and `chat.byokUtilityModelDefault` if Maestro set it) plus the Copilot model list.
+- The definition of what the extension owns in each agent's config, and the functions that add and remove it, live in one `vscode`-free module used by both the restore commands and the uninstall hook — so an uninstall cannot miss a key that apply() writes.
+
 ### Safety
 - API key stored in VS Code SecretStorage, never in `settings.json`.
 - Every agent config file is backed up to `.maestro-backup` before the first write.

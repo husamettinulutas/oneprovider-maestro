@@ -88,6 +88,16 @@ export class OneProviderChatProvider implements vscode.LanguageModelChatProvider
     this._onDidChange.fire();
   }
 
+  /**
+   * Drop every model from the Copilot picker. Used by the restore-all command:
+   * unlike Claude Code and Codex there is no file to clean up here, the models
+   * are contributed in-process, so emptying the list is the whole reset.
+   */
+  async clearSelection(): Promise<void> {
+    await this.globalState.update('oneprovider-selected-models', []);
+    this.refresh();
+  }
+
   // ── Model enumeration ──────────────────────────────────────────────────────
 
   async provideLanguageModelChatInformation(
