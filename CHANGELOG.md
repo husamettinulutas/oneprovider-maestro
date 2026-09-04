@@ -3,9 +3,10 @@
 All notable changes to **OneProvider Maestro** are documented here.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
-## [1.0.0] — 2026-09-04
+## [1.0.1] — 2026-09-04
 
-First release.
+First published release. (1.0.0 was packaged and tested locally but never
+reached the Marketplace, so everything below ships under this version.)
 
 ### Copilot Chat
 - Native `LanguageModelChatProvider` (`oneprovider-maestro` vendor) contributing OneProvider models straight into the model picker.

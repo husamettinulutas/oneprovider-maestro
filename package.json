@@ -2,7 +2,7 @@
   "name": "oneprovider-maestro",
   "displayName": "OneProvider Maestro",
   "description": "One extension to run OneProvider models everywhere: native Copilot Chat provider, Claude Code launcher/config manager, Codex CLI/IDE provider setup, and a live balance & usage dashboard with per-session cost tracking.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "husamettinulutas",
   "author": {
     "name": "Hüsamettin Ulutaş",
