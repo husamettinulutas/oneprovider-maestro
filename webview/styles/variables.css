@@ -47,6 +47,15 @@
   */
   --press:         rgba(230, 25, 25, 0.30);
 
+  /*
+    Opaque twin of --hazard-wash, pre-composited over the panel substrate.
+    A native <select> popup is painted by the OS using the control's own
+    background-color, and a translucent value there composites over the popup's
+    own white backdrop instead of ours -- which turns the open list white.
+    Anything whose colour can leak into native UI uses this instead.
+  */
+  --hazard-wash-solid: #2A1114;
+
   /* ── Status readout: one green, one purpose (link/key is live) ─────────── */
   --signal:        #4AF626;
 

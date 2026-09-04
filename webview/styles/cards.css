@@ -388,6 +388,7 @@
   appearance: none;
   border: var(--hairline);
   border-bottom-color: var(--rule-strong);
+  color-scheme: dark;   /* see .select in main.css */
   background: var(--bg-inset);
   color: var(--fg);
   font-family: var(--font-mono);
@@ -401,8 +402,18 @@
 }
 
 .effort select:hover {
-  background: var(--hazard-wash);
+  background: var(--hazard-wash-solid);
   border-color: var(--hazard-edge);
+}
+
+.effort select option {
+  background: var(--bg-inset);
+  color: var(--fg);
+}
+
+.effort select option:checked {
+  background: var(--bg-raised);
+  color: var(--fg);
 }
 
 .effort select:focus-visible {

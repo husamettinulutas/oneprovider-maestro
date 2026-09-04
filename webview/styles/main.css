@@ -504,6 +504,12 @@ body::after {
 .select {
   appearance: none;
   border: 0;
+  /*
+    Tell the browser to paint this control's native parts -- the dropdown list,
+    its scrollbar, its selected-row highlight -- in dark. Without it the popup
+    is a light-mode widget with a system-blue highlight sitting under a dark UI.
+  */
+  color-scheme: dark;
   background: var(--bg-panel);
   color: var(--fg-dim);
   font-family: var(--font-mono);
@@ -517,9 +523,23 @@ body::after {
 }
 
 .select:hover {
-  background: var(--hazard-wash);
+  background: var(--hazard-wash-solid);
   color: var(--fg);
   outline-color: var(--hazard-edge);
+}
+
+/*
+  The popup inherits the control's colours, so while it is open the hover state
+  is still applied and would tint the whole list. Pin the rows explicitly.
+*/
+.select option {
+  background: var(--bg-panel);
+  color: var(--fg);
+}
+
+.select option:checked {
+  background: var(--bg-raised);
+  color: var(--fg);
 }
 
 .select:focus-visible {
