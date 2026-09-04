@@ -1,0 +1,1954 @@
+{
+  "generatedFrom": "oneprovider.dev public catalog",
+  "models": {
+    "claude-fable-5": {
+      "name": "Fable 5.1",
+      "summary": "Frontier reasoning for demanding coding and agent workflows.",
+      "family": "fable",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 10,
+        "output": 50,
+        "cacheRead": 1,
+        "cacheWrite": 12.5
+      }
+    },
+    "claude-haiku-4-5": {
+      "name": "Claude Haiku 4.5",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "haiku",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "speed",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 200000,
+      "maxOutputTokens": 64000,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1,
+        "output": 5,
+        "cacheRead": 0.1,
+        "cacheWrite": 1.25
+      }
+    },
+    "claude-haiku-4-5-20251001": {
+      "name": "Claude Haiku 4.5 20251001",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "haiku",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 200000,
+      "maxOutputTokens": 64000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1,
+        "output": 5,
+        "cacheRead": 0.1,
+        "cacheWrite": 1.25
+      }
+    },
+    "claude-haiku-4-5-20251001-thinking": {
+      "name": "Claude Haiku 4.5 20251001 Thinking",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1,
+        "output": 5,
+        "cacheRead": 0.1,
+        "cacheWrite": 1.25
+      }
+    },
+    "claude-haiku-4-5-thinking": {
+      "name": "Claude Haiku 4.5 Thinking",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1,
+        "output": 5,
+        "cacheRead": 0.1,
+        "cacheWrite": 1.25
+      }
+    },
+    "claude-opus-4-6": {
+      "name": "Claude Opus 4.6",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "claude-opus-4-7": {
+      "name": "Claude Opus 4.7",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "claude-opus-4-8": {
+      "name": "Claude Opus 4.8",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "opus",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "flagship",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "claude-opus-5": {
+      "name": "Claude Opus 5",
+      "summary": "Current Opus generation for maximum reasoning capability.",
+      "family": "opus",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "flagship",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "claude-opus-5-thinking": {
+      "name": "Claude Opus 5 Thinking",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "claude-sonnet-4-6": {
+      "name": "Claude Sonnet 4.6",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 64000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 3,
+        "output": 15,
+        "cacheRead": 0.3,
+        "cacheWrite": 3.75
+      }
+    },
+    "claude-sonnet-5": {
+      "name": "Claude Sonnet 5",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "sonnet",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.2,
+        "cacheWrite": 2.5
+      }
+    },
+    "claude-sonnet-5-thinking": {
+      "name": "Claude Sonnet 5 Thinking",
+      "summary": "Production Anthropic model available through the Universal catalog.",
+      "family": "claude",
+      "productFamily": "claude",
+      "brand": "anthropic",
+      "brandLabel": "Claude",
+      "platform": "anthropic",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 10,
+        "cacheRead": 0.2,
+        "cacheWrite": 2.5
+      }
+    },
+    "deepseek-v4-flash": {
+      "name": "DeepSeek V4 Flash",
+      "summary": "Production DeepSeek model available through the Universal catalog.",
+      "family": "deepseek",
+      "productFamily": "deepseek",
+      "brand": "deepseek",
+      "brandLabel": "DeepSeek",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 393216,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.22,
+        "output": 0.66,
+        "cacheRead": 0.007,
+        "cacheWrite": 0.22
+      }
+    },
+    "deepseek-v4-flash-0731": {
+      "name": "DeepSeek V4 Flash 0731",
+      "summary": "Production DeepSeek model available through the Universal catalog.",
+      "family": "deepseek",
+      "productFamily": "deepseek",
+      "brand": "deepseek",
+      "brandLabel": "DeepSeek",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 393216,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.22,
+        "output": 0.66,
+        "cacheRead": 0.007,
+        "cacheWrite": 0.22
+      }
+    },
+    "deepseek-v4-flash-vision-exp": {
+      "name": "DeepSeek V4 Flash Vision Exp",
+      "summary": "Production DeepSeek model available through the Universal catalog.",
+      "family": "deepseek",
+      "productFamily": "deepseek",
+      "brand": "deepseek",
+      "brandLabel": "DeepSeek",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 393216,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.22,
+        "output": 0.66,
+        "cacheRead": 0.007,
+        "cacheWrite": 0.22
+      }
+    },
+    "deepseek-v4-pro": {
+      "name": "DeepSeek V4 Pro",
+      "summary": "Production DeepSeek model available through the Universal catalog.",
+      "family": "deepseek",
+      "productFamily": "deepseek",
+      "brand": "deepseek",
+      "brandLabel": "DeepSeek",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 393216,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.66,
+        "output": 1.98,
+        "cacheRead": 0.022,
+        "cacheWrite": 0.66
+      }
+    },
+    "deepseek-v4-pro-0813": {
+      "name": "DeepSeek V4 Pro 0813",
+      "summary": "Production DeepSeek model available through the Universal catalog.",
+      "family": "deepseek",
+      "productFamily": "deepseek",
+      "brand": "deepseek",
+      "brandLabel": "DeepSeek",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 393216,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.66,
+        "output": 1.98,
+        "cacheRead": 0.022,
+        "cacheWrite": 0.66
+      }
+    },
+    "gemini-2.5-flash": {
+      "name": "Gemini 2.5 Flash",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "cacheRead": 0.03,
+        "cacheWrite": 0.3
+      }
+    },
+    "gemini-2.5-flash-lite": {
+      "name": "Gemini 2.5 Flash Lite",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "efficient",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.1,
+        "output": 0.4,
+        "cacheRead": 0.01,
+        "cacheWrite": 0.1
+      }
+    },
+    "gemini-2.5-flash-thinking": {
+      "name": "Gemini 2.5 Flash Thinking",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "cacheRead": 0.03,
+        "cacheWrite": 0.3
+      }
+    },
+    "gemini-2.5-pro": {
+      "name": "Gemini 2.5 Pro",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.25,
+        "output": 10,
+        "cacheRead": 0.125,
+        "cacheWrite": 1.25
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 2.5,
+          "output": 15,
+          "cacheRead": 0.25,
+          "cacheWrite": 2.5
+        }
+      }
+    },
+    "gemini-3-flash": {
+      "name": "Gemini 3 Flash",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.5,
+        "output": 3,
+        "cacheRead": 0.05,
+        "cacheWrite": 0.5
+      }
+    },
+    "gemini-3-flash-preview": {
+      "name": "Gemini 3 Flash Preview",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.5,
+        "output": 3,
+        "cacheRead": 0.05,
+        "cacheWrite": 0.5
+      }
+    },
+    "gemini-3-pro-high": {
+      "name": "Gemini 3 Pro High",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3-pro-low": {
+      "name": "Gemini 3 Pro Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3-pro-preview": {
+      "name": "Gemini 3 Pro Preview",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.1-flash-image": {
+      "name": "Gemini 3.1 Flash Image",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "image",
+      "modality": "image",
+      "lifecycle": "active",
+      "contextTokens": 131072,
+      "maxOutputTokens": 32768,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": true,
+        "videoGeneration": null
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "image",
+        "components": [
+          {
+            "key": "0_5k",
+            "price": 0.045,
+            "unit": "per_image",
+            "condition": "0.5K"
+          },
+          {
+            "key": "1k",
+            "price": 0.067,
+            "unit": "per_image",
+            "condition": "1K"
+          },
+          {
+            "key": "2k",
+            "price": 0.101,
+            "unit": "per_image",
+            "condition": "2K"
+          },
+          {
+            "key": "4k",
+            "price": 0.151,
+            "unit": "per_image",
+            "condition": "4K"
+          }
+        ]
+      }
+    },
+    "gemini-3.1-flash-lite": {
+      "name": "Gemini 3.1 Flash Lite",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "efficient",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.25,
+        "output": 1.5,
+        "cacheRead": 0.025,
+        "cacheWrite": 0.25
+      }
+    },
+    "gemini-3.1-flash-lite-preview": {
+      "name": "Gemini 3.1 Flash Lite Preview",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.25,
+        "output": 1.5,
+        "cacheRead": 0.025,
+        "cacheWrite": 0.25
+      }
+    },
+    "gemini-3.1-pro": {
+      "name": "Gemini 3.1 Pro",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.1-pro-high": {
+      "name": "Gemini 3.1 Pro High",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.1-pro-low": {
+      "name": "Gemini 3.1 Pro Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.1-pro-preview": {
+      "name": "Gemini 3.1 Pro Preview",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.1-pro-preview-low": {
+      "name": "Gemini 3.1 Pro Preview Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 12,
+        "cacheRead": 0.2,
+        "cacheWrite": 2
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 18,
+          "cacheRead": 0.4,
+          "cacheWrite": 4
+        }
+      }
+    },
+    "gemini-3.5-flash": {
+      "name": "Gemini 3.5 Flash",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.5,
+        "output": 9,
+        "cacheRead": 0.15,
+        "cacheWrite": 1.5
+      }
+    },
+    "gemini-3.5-flash-extra-low": {
+      "name": "Gemini 3.5 Flash Extra Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.5,
+        "output": 9,
+        "cacheRead": 0.15,
+        "cacheWrite": 1.5
+      }
+    },
+    "gemini-3.5-flash-low": {
+      "name": "Gemini 3.5 Flash Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.5,
+        "output": 9,
+        "cacheRead": 0.15,
+        "cacheWrite": 1.5
+      }
+    },
+    "gemini-3.6-flash": {
+      "name": "Gemini 3.6 Flash",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cacheRead": 0.075,
+        "cacheWrite": 0.75
+      }
+    },
+    "gemini-3.6-flash-high": {
+      "name": "Gemini 3.6 Flash High",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cacheRead": 0.075,
+        "cacheWrite": 0.75
+      }
+    },
+    "gemini-3.6-flash-low": {
+      "name": "Gemini 3.6 Flash Low",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cacheRead": 0.075,
+        "cacheWrite": 0.75
+      }
+    },
+    "gemini-3.6-flash-tiered": {
+      "name": "Gemini 3.6 Flash Tiered",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cacheRead": 0.075,
+        "cacheWrite": 0.75
+      }
+    },
+    "gemini-3.7-flash": {
+      "name": "Gemini 3.7 Flash",
+      "summary": "Production Google model available through the Universal catalog.",
+      "family": "gemini",
+      "productFamily": "gemini",
+      "brand": "google",
+      "brandLabel": "Gemini",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cacheRead": 0.075,
+        "cacheWrite": 0.75
+      }
+    },
+    "glm-5.2": {
+      "name": "GLM 5.2",
+      "summary": "Production Z.ai model available through the Universal catalog.",
+      "family": "glm",
+      "productFamily": "glm",
+      "brand": "zhipu",
+      "brandLabel": "GLM",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 131072,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cacheRead": 0.26,
+        "cacheWrite": 1.4
+      }
+    },
+    "glm-5.3": {
+      "name": "GLM 5.3",
+      "summary": "Production Z.ai model available through the Universal catalog.",
+      "family": "glm",
+      "productFamily": "glm",
+      "brand": "zhipu",
+      "brandLabel": "GLM",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1000000,
+      "maxOutputTokens": 131072,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cacheRead": 0.26,
+        "cacheWrite": 1.4
+      }
+    },
+    "glm-5.3-flash": {
+      "name": "GLM 5.3 Flash",
+      "summary": "Production Z.ai model available through the Universal catalog.",
+      "family": "glm",
+      "productFamily": "glm",
+      "brand": "zhipu",
+      "brandLabel": "GLM",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 131072,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.15,
+        "output": 0.5,
+        "cacheRead": 0.03,
+        "cacheWrite": 0.15
+      }
+    },
+    "gpt-5.4": {
+      "name": "GPT-5.4",
+      "summary": "General-purpose compatibility model for professional workflows.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2.5,
+        "output": 15,
+        "cacheRead": 0.25,
+        "cacheWrite": 0
+      },
+      "longContext": {
+        "thresholdTokens": 272000,
+        "pricing": {
+          "input": 5,
+          "output": 22.5,
+          "cacheRead": 0.5,
+          "cacheWrite": 0
+        }
+      }
+    },
+    "gpt-5.4-mini": {
+      "name": "GPT-5.4 Mini",
+      "summary": "Production OpenAI model available through the Universal catalog.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 400000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.75,
+        "output": 4.5,
+        "cacheRead": 0.075,
+        "cacheWrite": 0
+      }
+    },
+    "gpt-5.5": {
+      "name": "GPT-5.5",
+      "summary": "Compatibility model for complex reasoning and professional workflows.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "flagship",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 30,
+        "cacheRead": 0.5,
+        "cacheWrite": 0
+      }
+    },
+    "gpt-5.6-luna": {
+      "name": "GPT-5.6 Luna",
+      "summary": "Production OpenAI model available through the Universal catalog.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "efficient",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1,
+        "output": 6,
+        "cacheRead": 0.1,
+        "cacheWrite": 1.25
+      }
+    },
+    "gpt-5.6-sol": {
+      "name": "GPT-5.6 Sol",
+      "summary": "Production OpenAI model available through the Universal catalog.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 30,
+        "cacheRead": 0.5,
+        "cacheWrite": 6.25
+      }
+    },
+    "gpt-5.6-terra": {
+      "name": "GPT-5.6 Terra",
+      "summary": "Production OpenAI model available through the Universal catalog.",
+      "family": "gpt",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1050000,
+      "maxOutputTokens": 128000,
+      "capabilities": {
+        "streaming": true,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2.5,
+        "output": 15,
+        "cacheRead": 0.25,
+        "cacheWrite": 3.125
+      }
+    },
+    "gpt-image-2": {
+      "name": "GPT Image 2",
+      "summary": "Generate and edit images through the OpenAI-compatible Images API.",
+      "family": "gpt-image",
+      "productFamily": "chatgpt",
+      "brand": "openai",
+      "brandLabel": "ChatGPT",
+      "platform": "openai",
+      "tier": "image",
+      "modality": "image",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": false,
+        "vision": true,
+        "imageGeneration": true,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 5,
+        "output": 10,
+        "cacheRead": 1.25,
+        "cacheWrite": 0
+      },
+      "generation": {
+        "modality": "image",
+        "components": [
+          {
+            "key": "input_image_tokens",
+            "price": 8,
+            "unit": "per_mtok",
+            "condition": "image input"
+          },
+          {
+            "key": "cached_input_image_tokens",
+            "price": 2,
+            "unit": "per_mtok",
+            "condition": "cached image input"
+          },
+          {
+            "key": "output_image_tokens",
+            "price": 30,
+            "unit": "per_mtok",
+            "condition": "generated image output"
+          }
+        ]
+      }
+    },
+    "grok-4.5": {
+      "name": "Grok 4.5",
+      "summary": "Grok model pending OneProvider protocol normalization and rollout gates.",
+      "family": "grok",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "flagship",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 500000,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": false,
+        "tools": false,
+        "vision": false,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 6,
+        "cacheRead": 0.3,
+        "cacheWrite": 0
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 12,
+          "cacheRead": 0.6,
+          "cacheWrite": 0
+        }
+      }
+    },
+    "grok-4.6": {
+      "name": "Grok 4.6",
+      "summary": "Grok model pending OneProvider protocol normalization and rollout gates.",
+      "family": "grok",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "text",
+      "lifecycle": "active",
+      "contextTokens": 500000,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": false,
+        "tools": false,
+        "vision": false,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 2,
+        "output": 6,
+        "cacheRead": 0.5,
+        "cacheWrite": 0
+      },
+      "longContext": {
+        "thresholdTokens": 200000,
+        "pricing": {
+          "input": 4,
+          "output": 12,
+          "cacheRead": 1,
+          "cacheWrite": 0
+        }
+      }
+    },
+    "grok-imagine": {
+      "name": "Grok Imagine",
+      "summary": "Production xAI model available through the Universal catalog.",
+      "family": "grok",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "image",
+      "modality": "image",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": false,
+        "tools": false,
+        "vision": true,
+        "imageGeneration": true,
+        "videoGeneration": null
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "image",
+        "components": [
+          {
+            "key": "request",
+            "price": 0.02,
+            "unit": "per_image",
+            "condition": "per generation request"
+          }
+        ]
+      }
+    },
+    "grok-imagine-image-2.0": {
+      "name": "Grok Imagine Image 2.0",
+      "summary": "Production xAI model available through the Universal catalog.",
+      "family": "grok-imagine",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "image",
+      "modality": "image",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": true,
+        "videoGeneration": null
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "image",
+        "components": [
+          {
+            "key": "1k",
+            "price": 0.06,
+            "unit": "per_image",
+            "condition": "1K"
+          },
+          {
+            "key": "2k",
+            "price": 0.08,
+            "unit": "per_image",
+            "condition": "2K"
+          }
+        ]
+      }
+    },
+    "grok-imagine-image-quality": {
+      "name": "Grok Imagine Image Quality",
+      "summary": "Production xAI model available through the Universal catalog.",
+      "family": "grok-imagine",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "image",
+      "modality": "image",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": true,
+        "videoGeneration": null
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "image",
+        "components": [
+          {
+            "key": "1k",
+            "price": 0.05,
+            "unit": "per_image",
+            "condition": "1K"
+          },
+          {
+            "key": "2k",
+            "price": 0.07,
+            "unit": "per_image",
+            "condition": "2K"
+          }
+        ]
+      }
+    },
+    "grok-imagine-video": {
+      "name": "Grok Imagine Video",
+      "summary": "Production xAI model available through the Universal catalog.",
+      "family": "grok-imagine",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "video",
+      "modality": "video",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": true
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "video",
+        "components": [
+          {
+            "key": "480p",
+            "price": 0.08,
+            "unit": "per_second",
+            "condition": "480p"
+          },
+          {
+            "key": "720p",
+            "price": 0.14,
+            "unit": "per_second",
+            "condition": "720p"
+          },
+          {
+            "key": "1080p",
+            "price": 0.25,
+            "unit": "per_second",
+            "condition": "1080p"
+          }
+        ]
+      }
+    },
+    "grok-imagine-video-1.5": {
+      "name": "Grok Imagine Video 1.5",
+      "summary": "Production xAI model available through the Universal catalog.",
+      "family": "grok-imagine",
+      "productFamily": "grok",
+      "brand": "xai",
+      "brandLabel": "Grok",
+      "platform": "openai",
+      "tier": "video",
+      "modality": "video",
+      "lifecycle": "active",
+      "contextTokens": null,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": null,
+        "vision": null,
+        "imageGeneration": null,
+        "videoGeneration": true
+      },
+      "pricing": null,
+      "generation": {
+        "modality": "video",
+        "components": [
+          {
+            "key": "480p",
+            "price": 0.08,
+            "unit": "per_second",
+            "condition": "480p"
+          },
+          {
+            "key": "720p",
+            "price": 0.14,
+            "unit": "per_second",
+            "condition": "720p"
+          },
+          {
+            "key": "1080p",
+            "price": 0.25,
+            "unit": "per_second",
+            "condition": "1080p"
+          }
+        ]
+      }
+    },
+    "kimi-k2.7-code": {
+      "name": "Kimi K2.7 Code",
+      "summary": "Production Moonshot model available through the Universal catalog.",
+      "family": "kimi",
+      "productFamily": "kimi",
+      "brand": "moonshot",
+      "brandLabel": "Kimi",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 262144,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": false,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.95,
+        "output": 4,
+        "cacheRead": 0.19,
+        "cacheWrite": 0.95
+      }
+    },
+    "kimi-k2.7-code-highspeed": {
+      "name": "Kimi K2.7 Code Highspeed",
+      "summary": "Production Moonshot model available through the Universal catalog.",
+      "family": "kimi",
+      "productFamily": "kimi",
+      "brand": "moonshot",
+      "brandLabel": "Kimi",
+      "platform": "openai",
+      "tier": "speed",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 262144,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": false,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 1.9,
+        "output": 8,
+        "cacheRead": 0.38,
+        "cacheWrite": 1.9
+      }
+    },
+    "kimi-k3": {
+      "name": "Kimi K3",
+      "summary": "Production Moonshot model available through the Universal catalog.",
+      "family": "kimi",
+      "productFamily": "kimi",
+      "brand": "moonshot",
+      "brandLabel": "Kimi",
+      "platform": "openai",
+      "tier": "frontier",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": null,
+      "capabilities": {
+        "streaming": null,
+        "tools": false,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 3,
+        "output": 15,
+        "cacheRead": 0.3,
+        "cacheWrite": 3
+      }
+    },
+    "mimo-v2.5-pro": {
+      "name": "MiMo V2.5 Pro",
+      "summary": "Production Xiaomi model available through the Universal catalog.",
+      "family": "mimo",
+      "productFamily": "mimo",
+      "brand": "xiaomi",
+      "brandLabel": "MiMo",
+      "platform": "openai",
+      "tier": "balanced",
+      "modality": "multimodal",
+      "lifecycle": "active",
+      "contextTokens": 1048576,
+      "maxOutputTokens": 131072,
+      "capabilities": {
+        "streaming": null,
+        "tools": true,
+        "vision": true,
+        "imageGeneration": null,
+        "videoGeneration": null
+      },
+      "pricing": {
+        "input": 0.435,
+        "output": 0.87,
+        "cacheRead": 0.0036,
+        "cacheWrite": 0.435
+      }
+    }
+  }
+}

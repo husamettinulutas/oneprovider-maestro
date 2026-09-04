@@ -1,0 +1,426 @@
+/* ===========================================================================
+   MODEL & AGENT CARDS
+   Compartmentalized data blocks: hairline borders, no radius, mono metadata.
+   =========================================================================== */
+
+/*
+  Hairlines are cell outlines drawn into the 1px gap. A rule-colored container
+  background would be simpler, but a grid whose last row is incomplete exposes
+  it as a grey void where the missing cards would be.
+*/
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--bg-panel);
+}
+
+/*
+  Flex column with the action row pushed down: cards in a row carry different
+  amounts of copy, and a ragged bottom edge breaks the grid the whole archetype
+  is built on.
+*/
+.model-card {
+  background: var(--bg-panel);
+  outline: 1px solid var(--rule);
+  padding: var(--u3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--u3);
+  min-width: 0;
+  transition: background var(--t-fast);
+}
+
+.model-card .card-targets {
+  margin-top: auto;
+}
+
+.model-card:hover {
+  background: var(--bg-inset);
+}
+
+.model-card:hover .target-btn:not(:disabled):not(.running) {
+  color: var(--fg-dim);
+}
+
+.model-card.enlisted {
+  box-shadow: inset 3px 0 0 var(--hazard);
+}
+
+.model-card.dormant {
+  opacity: 0.55;
+}
+
+/* ── Card identity block ──────────────────────────────────────────────────── */
+
+.card-id {
+  display: grid;
+  gap: 2px;
+}
+
+.card-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--u2);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.card-tier {
+  color: var(--hazard);
+}
+
+.card-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+.card-slug {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: 0.02em;
+  color: var(--fg-faint);
+  word-break: break-all;
+}
+
+.card-summary {
+  font-size: var(--data);
+  line-height: 1.5;
+  color: var(--fg-dim);
+}
+
+/* ── Flags ────────────────────────────────────────────────────────────────── */
+
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u1);
+}
+
+.flag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border: 1px solid var(--rule);
+  padding: 1px var(--u1);
+  white-space: nowrap;
+}
+
+.flag-live {
+  color: var(--fg-inverse);
+  background: var(--hazard);
+  border-color: var(--hazard);
+  font-weight: 600;
+}
+
+.flag-warn {
+  color: var(--hazard-bright);
+  border-color: var(--hazard-edge);
+}
+
+.flag-signal {
+  color: var(--signal);
+  border-color: rgba(74, 246, 38, 0.4);
+}
+
+/* ── Telemetry rows (definition lists — semantically what these are) ──────── */
+
+.telemetry {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule-faint);
+  border-top: var(--hairline-faint);
+  border-bottom: var(--hairline-faint);
+  margin: 0;
+}
+
+.telemetry > div {
+  background: var(--bg-panel);
+  padding: var(--u2);
+  display: grid;
+  gap: 2px;
+}
+
+.model-card:hover .telemetry > div {
+  background: var(--bg-inset);
+}
+
+.telemetry dt {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.telemetry dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--data);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.telemetry dd.free {
+  color: var(--signal);
+}
+
+/* ── Card actions ─────────────────────────────────────────────────────────── */
+
+.card-targets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: var(--hairline);
+}
+
+/*
+  The target row sits directly under a grid of static metric cells that share
+  its substrate, so at rest it needs its own tell: the --rule-strong keyline
+  carried by every pressable in the panel.
+*/
+.target-btn {
+  appearance: none;
+  border: 0;
+  background: var(--bg-inset);
+  box-shadow: inset 0 -1px 0 var(--rule-strong);
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u2) var(--u1);
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.target-btn:hover:not(:disabled) {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  box-shadow: inset 0 -2px 0 var(--hazard);
+}
+
+.target-btn:active:not(:disabled) {
+  background: var(--press);
+}
+
+.target-btn:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+.target-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;   /* no keyline -- there is nothing to press here */
+}
+
+.target-btn.enlisted {
+  color: var(--fg);
+  background: var(--bg-raised);
+  box-shadow: inset 0 -2px 0 var(--fg-faint);
+}
+
+.target-btn.enlisted:hover:not(:disabled) {
+  box-shadow: inset 0 -2px 0 var(--hazard);
+}
+
+.target-btn.running {
+  background: var(--hazard);
+  color: var(--fg-inverse);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.target-btn.running:hover:not(:disabled) {
+  background: var(--hazard-bright);
+  color: var(--fg-inverse);
+  box-shadow: none;
+}
+
+/* ── Roster / agent cards ─────────────────────────────────────────────────── */
+
+.stack {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: var(--hairline);
+}
+
+.unit {
+  background: var(--bg-panel);
+  padding: var(--u3);
+  display: grid;
+  gap: var(--u2);
+}
+
+.unit.running {
+  box-shadow: inset 3px 0 0 var(--hazard);
+}
+
+.unit-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--u3);
+  align-items: start;
+}
+
+.unit-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.015em;
+  color: var(--fg);
+}
+
+.unit-slug {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  color: var(--fg-faint);
+  word-break: break-all;
+}
+
+.unit-actions {
+  display: flex;
+  gap: var(--u1);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.unit-state {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--hazard-bright);
+  padding: var(--u2) var(--u1);
+  white-space: nowrap;
+}
+
+.note {
+  font-size: var(--data);
+  line-height: 1.55;
+  color: var(--fg-dim);
+  border-left: 2px solid var(--rule-strong);
+  padding-left: var(--u3);
+}
+
+.note.warn {
+  border-left-color: var(--hazard);
+  color: var(--fg);
+}
+
+.note code {
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  background: var(--bg-inset);
+  padding: 0 3px;
+}
+
+.steps {
+  margin: 0;
+  padding-left: var(--u5);
+  display: grid;
+  gap: var(--u1);
+  font-size: var(--data);
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+.steps li::marker {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  color: var(--hazard);
+}
+
+/* ── Restart banner ───────────────────────────────────────────────────────── */
+
+.restart {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--u3);
+  align-items: center;
+  border: 1px solid var(--hazard-edge);
+  background: var(--hazard-wash);
+  padding: var(--u3);
+}
+
+.restart-text {
+  font-size: var(--data);
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+/* ── Effort control ───────────────────────────────────────────────────────── */
+
+.effort {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--u3);
+  border-top: var(--hairline-faint);
+  padding-top: var(--u2);
+}
+
+.effort-label {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.effort select {
+  appearance: none;
+  border: var(--hairline);
+  border-bottom-color: var(--rule-strong);
+  background: var(--bg-inset);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u1) var(--u2);
+  width: 100%;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.effort select:hover {
+  background: var(--hazard-wash);
+  border-color: var(--hazard-edge);
+}
+
+.effort select:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+/* ── Overflow marker ──────────────────────────────────────────────────────── */
+
+.overflow-note {
+  grid-column: 1 / -1;
+  background: var(--bg-panel);
+  outline: 1px solid var(--rule);
+  padding: var(--u3);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}

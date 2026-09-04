@@ -1,0 +1,99 @@
+/* ===========================================================================
+   TACTICAL TELEMETRY — DESIGN TOKENS
+   ---------------------------------------------------------------------------
+   One substrate, committed to: dark. The panel does not follow the VS Code
+   theme, because a half-light / half-dark telemetry surface reads as a bug
+   rather than a choice, and the archetype forbids mixing substrates.
+
+   Accent architecture:
+     --hazard      structural accent. Alerts, active state, vital data.
+     --series-*    data-encoding hues only. A stacked token bar needs four
+                   distinguishable channels; those are readings, not decoration,
+                   and they are the only colors outside the hazard/greyscale
+                   system. They match the OneProvider dashboard's own legend so
+                   the two surfaces read the same numbers the same way.
+   =========================================================================== */
+
+:root {
+  /* ── Substrate ─────────────────────────────────────────────────────────── */
+  --bg:            #0A0A0B;   /* Deactivated CRT — never pure black. */
+  --bg-panel:      #0F0F11;
+  --bg-inset:      #141416;
+  --bg-raised:     #191919;
+  --bg-overlay:    rgba(10, 10, 11, 0.92);
+
+  /* ── Rules & compartments ──────────────────────────────────────────────── */
+  --rule:          #2A2A2D;   /* 1px hairline between grid cells. */
+  --rule-strong:   #3D3D42;
+  --rule-faint:    #1D1D20;
+
+  /* ── Phosphor ──────────────────────────────────────────────────────────── */
+  --fg:            #EAEAEA;
+  --fg-dim:        #9B9BA1;
+  --fg-faint:      #6A6A70;
+  --fg-inverse:    #0A0A0B;
+
+  /* ── Hazard: the single structural accent ──────────────────────────────── */
+  --hazard:        #E61919;
+  --hazard-bright: #FF2A2A;
+  --hazard-wash:   rgba(230, 25, 25, 0.12);
+  --hazard-edge:   rgba(230, 25, 25, 0.45);
+
+  /*
+    Affordance channel. Every pressable control answers the pointer in hazard
+    and nothing else does, so "what can I press" has one question and one
+    answer. Rest carries a --rule-strong keyline; hover swaps it to hazard;
+    press fills. Static readouts never move.
+  */
+  --press:         rgba(230, 25, 25, 0.30);
+
+  /* ── Status readout: one green, one purpose (link/key is live) ─────────── */
+  --signal:        #4AF626;
+
+  /* ── Data series (charts and token bars only) ──────────────────────────── */
+  --series-input:  #3B82F6;
+  --series-output: #10B981;
+  --series-cache-read:  #F59E0B;
+  --series-cache-write: #A855F7;
+  --series-cost:   #63B8FB;
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-mono: ui-monospace, 'Cascadia Mono', 'JetBrains Mono', 'IBM Plex Mono',
+               'SFMono-Regular', Consolas, 'Courier New', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               system-ui, 'Helvetica Neue', sans-serif;
+
+  /* Micro-typography: fixed, small, generously tracked, uppercase. */
+  --micro:      10px;
+  --micro-lg:   11px;
+  --data:       12px;
+  --data-lg:    13px;
+  --body:       13px;
+  --track:      0.09em;
+  --track-wide: 0.16em;
+
+  /* ── Spatial grid (4px module) ─────────────────────────────────────────── */
+  --u1:  4px;
+  --u2:  8px;
+  --u3:  12px;
+  --u4:  16px;
+  --u5:  20px;
+  --u6:  24px;
+  --u8:  32px;
+  --u10: 40px;
+
+  /* Geometry is mechanical: every corner is 90 degrees. No radius token. */
+  --hairline: 1px solid var(--rule);
+  --hairline-faint: 1px solid var(--rule-faint);
+
+  --t-fast: 90ms linear;
+  --t-base: 160ms linear;
+}
+
+/* Motion is mechanical, not organic — honor the OS setting outright. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 1ms linear;
+    --t-base: 1ms linear;
+  }
+}

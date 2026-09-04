@@ -1,0 +1,15 @@
+.vscode/**
+.vscode-test/**
+.agents/**
+src/**
+node_modules/**
+.gitignore
+media/**
+skills-lock.json
+tsconfig.json
+esbuild.js
+**/*.map
+**/*.ts
+*.vsix
+!dist/**
+!webview/**

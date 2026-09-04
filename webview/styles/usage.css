@@ -1,0 +1,551 @@
+/* ===========================================================================
+   USAGE PANEL — balance, telemetry, charts, activity log
+   Mirrors the section order of the OneProvider web dashboard so the two
+   surfaces can be read against each other without re-learning the layout.
+   =========================================================================== */
+
+/* ── Balance block ────────────────────────────────────────────────────────── */
+
+.balance {
+  border: var(--hairline);
+  background: var(--bg-panel);
+}
+
+.balance-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--u2);
+  padding: var(--u3);
+  border-bottom: var(--hairline);
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u1);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border: 1px solid var(--rule);
+  padding: 2px var(--u2);
+}
+
+.state-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--fg-faint);
+}
+
+.state.ok .state-dot {
+  background: var(--signal);
+}
+
+.state.bad .state-dot {
+  background: var(--hazard);
+}
+
+.state.bad {
+  color: var(--hazard-bright);
+  border-color: var(--hazard-edge);
+}
+
+.balance-figure {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--u3) var(--u4);
+  align-items: end;
+  padding: var(--u4) var(--u3) var(--u3);
+}
+
+/*
+  The one place the archetype's macro-typography earns its keep: the number the
+  user actually opened this tab for, at a scale nothing else competes with.
+*/
+.balance-amount {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2rem, 9vw, 3.25rem);
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+.balance-sub {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin-top: var(--u2);
+}
+
+/*
+  Right-aligned only while it sits beside the balance figure; once the flex row
+  wraps it starts a line of its own, where right alignment reads as a mistake.
+*/
+@media (min-width: 561px) {
+  .balance-expiry {
+    text-align: right;
+  }
+}
+
+/* A raw capacity bar: filled portion is what remains. */
+.meter {
+  height: 8px;
+  background: var(--bg-inset);
+  border: var(--hairline-faint);
+  margin: 0 var(--u3) var(--u3);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--fg);
+  transition: width var(--t-base);
+}
+
+.meter-fill.low {
+  background: var(--hazard);
+}
+
+/* ── Metric grid (shared by balance sub-stats and usage totals) ───────────── */
+
+/*
+  Hairlines are drawn as cell outlines into the 1px gap, not as a rule-colored
+  container background. A grid whose last row is incomplete would otherwise
+  expose that background as a grey void beside the final cell.
+*/
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1px;
+  background: var(--bg-panel);
+}
+
+.metric {
+  background: var(--bg-panel);
+  outline: 1px solid var(--rule);
+  padding: var(--u3);
+  display: grid;
+  gap: var(--u2);
+  align-content: start;
+  min-height: 74px;
+}
+
+.metric dt {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.metric dd {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  line-height: 1.1;
+}
+
+.metric dd.small {
+  font-size: var(--data-lg);
+}
+
+.metric dd.hazard {
+  color: var(--hazard-bright);
+}
+
+/* ── Range switch ─────────────────────────────────────────────────────────── */
+
+.range {
+  display: flex;
+  gap: 1px;
+  background: var(--rule);
+  border: var(--hairline);
+}
+
+.range button {
+  appearance: none;
+  border: 0;
+  background: var(--bg-panel);
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u1) var(--u2);
+  cursor: pointer;
+}
+
+.range button:hover:not(.active) {
+  color: var(--fg);
+  background: var(--hazard-wash);
+}
+
+.range button:active {
+  background: var(--press);
+}
+
+.range button.active:hover {
+  background: var(--hazard-bright);
+}
+
+.range button.active {
+  background: var(--hazard);
+  color: var(--fg-inverse);
+  font-weight: 600;
+}
+
+.range button:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+/* ── Charts ───────────────────────────────────────────────────────────────── */
+
+.chart-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border: var(--hairline);
+}
+
+.chart {
+  background: var(--bg-panel);
+  padding: var(--u3);
+  display: grid;
+  gap: var(--u3);
+  min-width: 0;
+}
+
+.chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--u1) var(--u2);
+}
+
+.chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-grid line {
+  stroke: var(--rule-faint);
+  stroke-width: 1;
+}
+
+.chart-axis {
+  fill: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.chart-empty {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  text-align: center;
+  padding: var(--u8) 0;
+}
+
+/* ── Token breakdown ──────────────────────────────────────────────────────── */
+
+.breakdown {
+  border: var(--hairline);
+  background: var(--bg-panel);
+  padding: var(--u3);
+  display: grid;
+  gap: var(--u3);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u3);
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u1);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+.legend i {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+.swatch-input { background: var(--series-input); }
+.swatch-output { background: var(--series-output); }
+.swatch-cache-read { background: var(--series-cache-read); }
+.swatch-cache-write { background: var(--series-cache-write); }
+
+.day-rows {
+  display: grid;
+  gap: var(--u2);
+}
+
+.day-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 62px;
+  align-items: center;
+  gap: var(--u2);
+}
+
+.day-label,
+.day-total {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-faint);
+}
+
+.day-total {
+  text-align: right;
+  color: var(--fg-dim);
+}
+
+.day-bar {
+  display: flex;
+  height: 10px;
+  background: var(--bg-inset);
+  border: var(--hairline-faint);
+}
+
+.day-bar span {
+  height: 100%;
+  display: block;
+}
+
+/* ── Model usage ──────────────────────────────────────────────────────────── */
+
+.usage-models {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;
+  background: var(--bg-panel);
+}
+
+/* Same outline technique as .metrics — see the note there. */
+.usage-model {
+  background: var(--bg-panel);
+  outline: 1px solid var(--rule);
+  padding: var(--u3);
+  display: grid;
+  gap: var(--u2);
+  align-content: start;
+  min-width: 0;
+}
+
+.usage-model-head {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: var(--u2);
+}
+
+.usage-model-name {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  color: var(--fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.usage-model-count {
+  font-family: var(--font-mono);
+  font-size: var(--data);
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.usage-model-share {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--fg-faint);
+}
+
+.share-bar {
+  height: 4px;
+  background: var(--bg-inset);
+}
+
+.share-bar span {
+  display: block;
+  height: 100%;
+  background: var(--hazard);
+}
+
+.usage-model-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u2);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+/* ── Activity log ─────────────────────────────────────────────────────────── */
+
+.log {
+  border: var(--hairline);
+  background: var(--bg-panel);
+}
+
+.log-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--u3);
+  padding: var(--u3);
+  border-bottom: var(--hairline);
+}
+
+.log table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  font-variant-numeric: tabular-nums;
+}
+
+.log th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  padding: var(--u2) var(--u3);
+  border-bottom: var(--hairline);
+  white-space: nowrap;
+}
+
+.log td {
+  padding: var(--u2) var(--u3);
+  border-bottom: var(--hairline-faint);
+  color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+.log tr:last-child td {
+  border-bottom: 0;
+}
+
+.log tr:hover td {
+  background: var(--bg-inset);
+}
+
+.log .col-num {
+  text-align: right;
+}
+
+.log .col-model {
+  color: var(--fg);
+}
+
+.log .col-cost {
+  text-align: right;
+  color: var(--fg);
+}
+
+/* ── Info strip ───────────────────────────────────────────────────────────── */
+
+.strip {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--u3);
+  align-items: start;
+  border: var(--hairline);
+  border-left: 2px solid var(--rule-strong);
+  padding: var(--u3);
+  font-size: var(--data);
+  line-height: 1.55;
+  color: var(--fg-dim);
+  background: var(--bg-panel);
+}
+
+.strip.alert {
+  border-left-color: var(--hazard);
+  color: var(--fg);
+}
+
+.strip-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  padding-top: 2px;
+  white-space: nowrap;
+}
+
+.strip.alert .strip-tag {
+  color: var(--hazard-bright);
+}
+
+/* ── Link row ─────────────────────────────────────────────────────────────── */
+
+.linkrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--rule);
+  border: var(--hairline);
+}
+
+.linkrow button {
+  appearance: none;
+  border: 0;
+  flex: 1;
+  min-width: 130px;
+  background: var(--bg-panel);
+  color: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u3) var(--u2);
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.linkrow button:hover {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  box-shadow: inset 0 -2px 0 var(--hazard);
+}
+
+.linkrow button:active {
+  background: var(--press);
+}
+
+.linkrow button:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}

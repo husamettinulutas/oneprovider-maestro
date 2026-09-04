@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src {{cspSource}} 'unsafe-inline'; script-src {{cspSource}}; img-src {{cspSource}} data:; font-src {{cspSource}};">
+  <title>OneProvider Maestro</title>
+  <link rel="stylesheet" href="{{variablesCssUri}}">
+  <link rel="stylesheet" href="{{mainCssUri}}">
+  <link rel="stylesheet" href="{{cardsCssUri}}">
+  <link rel="stylesheet" href="{{usageCssUri}}">
+</head>
+<body>
+  <div class="app">
+
+    <header class="masthead">
+      <div class="masthead-id">
+        <svg class="masthead-mark" viewBox="0 0 1000 1000" aria-hidden="true">
+          <path fill="currentColor" d="M848 660c-19-45-53-77-53-77-162-165-209-308-219-346a24 24 0 0 0-11-15l-27-17c-7-5-16 0-17 9-8 219 133 280 133 280 84 39 109 79 114 109 3 22-5 44-22 60-84 77-247 73-247 73s-163 4-247-73c-16-16-25-38-21-60 4-30 30-70 114-109 0 0 140-61 132-280 0-9-9-14-17-9l-26 17a24 24 0 0 0-11 15c-10 38-58 181-219 346 0 0-35 32-53 77-9 22-8 47 4 67l28 47c11 18 32 27 52 22 59-16 182-42 264-42s205 26 264 42c20 5 41-4 52-22l28-47c12-20 13-45 4-67Z"/>
+          <path fill="currentColor" d="M598 529c-12-13-24-28-36-45-14-20-26-39-36-57a24 24 0 0 0-15-11 65 65 0 0 0-21 0 24 24 0 0 0-15 11c-10 18-22 37-36 57-12 17-24 32-36 45-20 23-13 59 15 71l1 0c34 14 61 16 82 16s48-2 81-16l1 0c28-12 36-48 15-71Z"/>
+        </svg>
+        <span class="masthead-title">OneProvider Maestro</span>
+        <span class="masthead-rev" aria-hidden="true">/// UNIT 01</span>
+      </div>
+      <div class="masthead-actions">
+        <button class="icon-btn" id="key-btn" title="Set the OneProvider API key">◈<span class="btn-label"> Key</span></button>
+        <button class="icon-btn" id="sync-btn" title="Sync the model list from OneProvider">↻<span class="btn-label"> Sync</span></button>
+      </div>
+    </header>
+
+    <!-- Shown until an API key is stored -->
+    <div class="keybanner hidden" id="key-banner">
+      <span class="keybanner-tag">No key</span>
+      <span class="keybanner-text">Set your OneProvider API key to list the models your key can call, and to read its balance.</span>
+      <button class="btn btn-primary" id="key-banner-btn">Set key</button>
+    </div>
+
+    <nav class="tabrail" role="tablist">
+      <button class="tab active" id="tab-browse" role="tab" aria-selected="true">Browse</button>
+      <button class="tab" id="tab-copilot" role="tab" aria-selected="false">
+        Copilot <span class="tab-count" id="count-copilot">0</span>
+      </button>
+      <button class="tab" id="tab-claude" role="tab" aria-selected="false">
+        Claude<span class="tab-long">&nbsp;Code</span> <span class="tab-count" id="count-claude">0</span>
+      </button>
+      <button class="tab" id="tab-codex" role="tab" aria-selected="false">
+        Codex <span class="tab-count" id="count-codex">0</span>
+      </button>
+      <button class="tab" id="tab-usage" role="tab" aria-selected="false">Usage</button>
+    </nav>
+
+    <!-- ══ BROWSE ══════════════════════════════════════════════════════════ -->
+    <section class="panel active" id="panel-browse" role="tabpanel">
+      <div class="controls">
+        <div class="search-row">
+          <span class="search-sigil" aria-hidden="true">&gt;&gt;&gt;</span>
+          <input type="text" class="search-input" id="search"
+                 placeholder="Filter by name, id or brand"
+                 autocomplete="off" spellcheck="false" aria-label="Filter models">
+          <button class="search-clear" id="search-clear" title="Clear filter" aria-label="Clear filter">✕</button>
+        </div>
+        <div class="filter-row">
+          <button class="chip" id="f-vision">Vision</button>
+          <button class="chip" id="f-tools">Tools</button>
+          <button class="chip" id="f-thinking">Thinking</button>
+          <button class="chip" id="f-live">Key only</button>
+          <select class="select" id="f-brand" aria-label="Filter by brand">
+            <option value="">All brands</option>
+          </select>
+          <select class="select" id="f-sort" aria-label="Sort models">
+            <option value="default">Sort · Recommended</option>
+            <option value="price-asc">Sort · Cheapest input</option>
+            <option value="price-desc">Sort · Priciest input</option>
+            <option value="context-desc">Sort · Largest context</option>
+            <option value="name-asc">Sort · Name A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="section-head">
+          <h2 class="section-title">[ Model catalog ]</h2>
+          <span class="section-meta" id="browse-meta">—</span>
+        </div>
+        <div id="model-list"></div>
+      </div>
+    </section>
+
+    <!-- ══ COPILOT ═════════════════════════════════════════════════════════ -->
+    <section class="panel" id="panel-copilot" role="tabpanel">
+      <div class="panel-body">
+        <div class="section-head">
+          <h2 class="section-title">[ Copilot chat ]</h2>
+          <span class="section-meta">Vendor · OneProvider Maestro</span>
+        </div>
+        <div class="strip">
+          <span class="strip-tag">How</span>
+          <span>Every model listed here appears in the Copilot Chat model picker under <b>OneProvider Maestro</b>. Add or drop them from the <b>Browse</b> tab — nothing outside this extension is reconfigured.</span>
+        </div>
+        <div id="copilot-list"></div>
+      </div>
+    </section>
+
+    <!-- ══ CLAUDE CODE ═════════════════════════════════════════════════════ -->
+    <section class="panel" id="panel-claude" role="tabpanel">
+      <div class="panel-body" id="claude-body"></div>
+    </section>
+
+    <!-- ══ CODEX ═══════════════════════════════════════════════════════════ -->
+    <section class="panel" id="panel-codex" role="tabpanel">
+      <div class="panel-body" id="codex-body"></div>
+    </section>
+
+    <!-- ══ USAGE ═══════════════════════════════════════════════════════════ -->
+    <section class="panel" id="panel-usage" role="tabpanel">
+      <div class="panel-body" id="usage-body"></div>
+    </section>
+
+    <div class="loading" id="loading">
+      <div class="loading-text">Syncing catalog</div>
+    </div>
+
+    <div class="toasts" id="toasts" aria-live="polite"></div>
+  </div>
+
+  <script src="{{vscodeApiJsUri}}"></script>
+  <script src="{{filtersJsUri}}"></script>
+  <script src="{{chartsJsUri}}"></script>
+  <script src="{{usageJsUri}}"></script>
+  <script src="{{appJsUri}}"></script>
+</body>
+</html>

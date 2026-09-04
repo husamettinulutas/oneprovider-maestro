@@ -1,0 +1,326 @@
+{
+  "name": "oneprovider-maestro",
+  "displayName": "OneProvider Maestro",
+  "description": "One extension to run OneProvider models everywhere: native Copilot Chat provider, Claude Code launcher/config manager, Codex CLI/IDE provider setup, and a live balance & usage dashboard with per-session cost tracking.",
+  "version": "1.0.0",
+  "publisher": "husamettinulutas",
+  "author": {
+    "name": "Hüsamettin Ulutaş",
+    "url": "https://github.com/husamettinulutas"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/husamettinulutas/oneprovider-maestro.git"
+  },
+  "homepage": "https://github.com/husamettinulutas/oneprovider-maestro#readme",
+  "bugs": {
+    "url": "https://github.com/husamettinulutas/oneprovider-maestro/issues"
+  },
+  "license": "MIT",
+  "icon": "resources/icon.png",
+  "galleryBanner": {
+    "color": "#050506",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "AI",
+    "Chat",
+    "Other"
+  ],
+  "keywords": [
+    "oneprovider",
+    "copilot",
+    "claude code",
+    "codex",
+    "ai",
+    "language model",
+    "chat",
+    "llm",
+    "model manager",
+    "usage dashboard"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "oneprovider-maestro",
+        "displayName": "OneProvider Maestro"
+      }
+    ],
+    "commands": [
+      {
+        "command": "oneproviderMaestro.openBrowser",
+        "title": "OneProvider Maestro: Browse Models",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "oneproviderMaestro.setApiKey",
+        "title": "OneProvider Maestro: Set API Key",
+        "icon": "$(key)"
+      },
+      {
+        "command": "oneproviderMaestro.syncModels",
+        "title": "OneProvider Maestro: Sync Models from API",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "oneproviderMaestro.refreshUsage",
+        "title": "OneProvider Maestro: Refresh Balance & Usage",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "oneproviderMaestro.resetSessionUsage",
+        "title": "OneProvider Maestro: Reset Session Spend Counter",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "oneproviderMaestro.claudeCode.apply",
+        "title": "OneProvider Maestro: Use Model in Claude Code",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "oneproviderMaestro.claudeCode.restore",
+        "title": "OneProvider Maestro: Restore Claude Code Defaults (Anthropic)",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "oneproviderMaestro.codex.apply",
+        "title": "OneProvider Maestro: Use Model in Codex",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "oneproviderMaestro.codex.restore",
+        "title": "OneProvider Maestro: Restore Codex Defaults (OpenAI)",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "oneproviderMaestro.showStatus",
+        "title": "OneProvider Maestro: Show Integration Status",
+        "icon": "$(info)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "oneprovider-maestro-explorer",
+          "title": "OneProvider Maestro",
+          "icon": "resources/activity-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "oneprovider-maestro-explorer": [
+        {
+          "id": "oneprovider-maestro-browse",
+          "name": "Model Browser",
+          "type": "webview"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "oneproviderMaestro.syncModels",
+          "when": "view == oneprovider-maestro-browse",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "OneProvider Maestro",
+      "properties": {
+        "oneproviderMaestro.apiEndpoint": {
+          "type": "string",
+          "default": "https://api.oneprovider.dev/v1",
+          "description": "OneProvider OpenAI-compatible API base URL. Change this only if you use a proxy."
+        },
+        "oneproviderMaestro.anthropicBaseUrl": {
+          "type": "string",
+          "default": "https://api.oneprovider.dev",
+          "description": "OneProvider Anthropic-native base URL written into Claude Code's ANTHROPIC_BASE_URL. Claude Code appends /v1/messages itself, so there is no /v1 suffix here."
+        },
+        "oneproviderMaestro.cache.ttlMinutes": {
+          "type": "number",
+          "default": 60,
+          "description": "How many minutes before the model list is considered stale and automatically refreshed.",
+          "minimum": 1
+        },
+        "oneproviderMaestro.requestTimeoutSeconds": {
+          "type": "number",
+          "default": 60,
+          "description": "Maximum time in seconds to wait for a response from OneProvider before timing out.",
+          "minimum": 10,
+          "maximum": 300
+        },
+        "oneproviderMaestro.maxRetries": {
+          "type": "number",
+          "default": 3,
+          "description": "Maximum number of retry attempts for failed requests (rate limits, server errors).",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "oneproviderMaestro.defaultTemperature": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "description": "Default temperature for model responses (0.0 = deterministic, 2.0 = creative). Leave empty to use the model default.",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "oneproviderMaestro.defaultMaxTokens": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "description": "Default maximum output tokens. Leave empty to use the model default.",
+          "minimum": 1
+        },
+        "oneproviderMaestro.showCatalogOnlyModels": {
+          "type": "boolean",
+          "default": true,
+          "description": "Also list models from the bundled OneProvider catalog that the live /v1/models endpoint did not return for your key. They are marked \"catalog only\" and may not be usable."
+        },
+        "oneproviderMaestro.maxInputTokensOverride": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "description": "Override the maxInputTokens reported to VS Code. Lower values trigger conversation compaction earlier, preventing oversized request bodies. Leave empty to auto-calculate from the model's context window.",
+          "minimum": 8192
+        },
+        "oneproviderMaestro.reasoningEffortModelPattern": {
+          "type": "string",
+          "default": "^gpt-5",
+          "description": "Regular expression matching model ids that accept OpenAI-style `reasoning_effort`. OneProvider exposes Claude thinking as separate `-thinking` model ids instead, so those need no parameter. Widen this only if you know your models accept the field; an unsupported field is rejected with 400."
+        },
+        "oneproviderMaestro.defaultReasoningEffort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "enum": [
+            null,
+            "none",
+            "minimal",
+            "low",
+            "medium",
+            "high"
+          ],
+          "description": "Default thinking effort for models matched by reasoningEffortModelPattern. \"none\" omits the field entirely. The Copilot model-picker Thinking Effort submenu overrides this per session."
+        },
+        "oneproviderMaestro.usage.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Fetch live balance and usage from the OneProvider dashboard API. Disabling this stops the extension from sending your API key to dashboard.oneprovider.dev; the Usage tab then only shows locally tracked session spend."
+        },
+        "oneproviderMaestro.usage.endpoint": {
+          "type": "string",
+          "default": "https://dashboard.oneprovider.dev/api/dashboard/lookup",
+          "description": "OneProvider dashboard lookup endpoint used for balance and usage figures."
+        },
+        "oneproviderMaestro.usage.autoRefreshMinutes": {
+          "type": "number",
+          "default": 5,
+          "description": "How often to refresh balance and usage in the background. Set to 0 to refresh only on demand.",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "oneproviderMaestro.usage.defaultRangeDays": {
+          "type": "number",
+          "default": 1,
+          "enum": [
+            1,
+            3,
+            7,
+            30
+          ],
+          "description": "Time range the Usage tab opens with.",
+          "enumDescriptions": [
+            "Last 24 hours",
+            "Last 3 days",
+            "Last 7 days",
+            "Last 30 days"
+          ]
+        },
+        "oneproviderMaestro.statusBar.mode": {
+          "type": "string",
+          "enum": [
+            "session",
+            "balance",
+            "both",
+            "hidden"
+          ],
+          "default": "both",
+          "description": "What the status bar item shows.",
+          "enumDescriptions": [
+            "Cost burned in this VS Code session",
+            "Remaining account balance",
+            "Session spend and remaining balance",
+            "Hide the status bar item"
+          ]
+        },
+        "oneproviderMaestro.claudeCode.settingsScope": {
+          "type": "string",
+          "enum": [
+            "user",
+            "project"
+          ],
+          "default": "user",
+          "description": "Where to write Claude Code environment settings: 'user' (~/.claude/settings.json, applies everywhere) or 'project' (.claude/settings.local.json in the current workspace only)."
+        },
+        "oneproviderMaestro.claudeCode.smallFastModel": {
+          "type": "string",
+          "default": "",
+          "description": "OneProvider model id to use for Claude Code background/haiku-class tasks (ANTHROPIC_SMALL_FAST_MODEL). Leave empty to use the same model as the main one."
+        },
+        "oneproviderMaestro.codex.configPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the Codex config.toml. Leave empty for the default ~/.codex/config.toml."
+        },
+        "oneproviderMaestro.logLevel": {
+          "type": "string",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "default": "info",
+          "description": "Minimum log level for the OneProvider Maestro output channel.",
+          "enumDescriptions": [
+            "Show all messages including debug details",
+            "Show informational messages and above",
+            "Show warnings and errors only",
+            "Show errors only"
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js --production",
+    "compile": "tsc --noEmit",
+    "watch": "node esbuild.js --watch",
+    "package": "npx @vscode/vsce package --no-dependencies",
+    "test": "npx --yes tsx --test src/__tests__/apiKeyUtils.test.ts src/__tests__/modelId.test.ts src/__tests__/reasoningEffort.test.ts src/__tests__/modelCatalog.test.ts src/__tests__/sessionUsage.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.104.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.5.0"
+  }
+}

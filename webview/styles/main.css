@@ -1,0 +1,704 @@
+/* ===========================================================================
+   SHELL — masthead, tab rail, filters, controls, overlays
+   =========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  Mechanical noise: one low-opacity grain layer over the whole surface so the
+  panel reads as a physical readout rather than flat vector fill. Pointer-events
+  off so it never eats a click.
+*/
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Type primitives ──────────────────────────────────────────────────────── */
+
+.micro {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  line-height: 1.3;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Macro-typography: heavy, tight, compressed, uppercase. */
+.macro {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────────── */
+
+.masthead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--u3);
+  padding: var(--u3) var(--u4);
+  border-bottom: 2px solid var(--rule-strong);
+  background: var(--bg-panel);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.masthead-id {
+  display: flex;
+  align-items: center;
+  gap: var(--u2);
+  min-width: 0;
+}
+
+.masthead-mark {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.masthead-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 18px;   /* pinned to .masthead-mark, so header height is fixed */
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.masthead-rev {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.masthead-actions {
+  display: flex;
+  gap: 0;
+  border: var(--hairline);
+}
+
+.icon-btn {
+  appearance: none;
+  border: 0;
+  border-left: var(--hairline);
+  background: var(--bg-inset);
+  color: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u2) var(--u3);
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.icon-btn:first-child {
+  border-left: 0;
+}
+
+.icon-btn:hover {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  box-shadow: inset 0 -2px 0 var(--hazard);
+}
+
+.icon-btn:active {
+  background: var(--press);
+}
+
+.icon-btn:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+.icon-btn.spinning {
+  color: var(--hazard-bright);
+}
+
+/* ── Key banner ───────────────────────────────────────────────────────────── */
+
+.keybanner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--u3);
+  padding: var(--u3) var(--u4);
+  background: var(--hazard-wash);
+  border-bottom: 1px solid var(--hazard-edge);
+}
+
+.keybanner-tag {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--hazard-bright);
+  border: 1px solid var(--hazard-edge);
+  padding: 2px var(--u2);
+}
+
+.keybanner-text {
+  font-size: var(--data);
+  color: var(--fg-dim);
+}
+
+/* ── Tab rail ─────────────────────────────────────────────────────────────── */
+
+.tabrail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border-bottom: var(--hairline);
+  position: sticky;
+  top: 49px;
+  z-index: 19;
+}
+
+.tab {
+  appearance: none;
+  border: 0;
+  background: var(--bg-panel);
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  padding: var(--u3) var(--u2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--u1);
+  white-space: nowrap;
+  border-top: 2px solid transparent;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.tab:hover:not(.active) {
+  background: var(--bg-inset);
+  color: var(--fg);
+  border-top-color: var(--hazard-edge);
+}
+
+.tab.active {
+  background: var(--bg);
+  color: var(--fg);
+  border-top-color: var(--hazard);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+.tab-count {
+  font-size: 9px;
+  color: var(--fg-faint);
+  border: 1px solid var(--rule);
+  padding: 0 3px;
+  min-width: 15px;
+  text-align: center;
+}
+
+.tab.active .tab-count {
+  color: var(--fg-dim);
+  border-color: var(--rule-strong);
+}
+
+/* A live agent gets the hazard marker: something is wired in right now. */
+.tab-count.live {
+  color: var(--fg-inverse);
+  background: var(--hazard);
+  border-color: var(--hazard);
+}
+
+/*
+  A docked sidebar can be ~300px wide, where five padded labels do not fit and
+  the rail would push the document wider than the viewport. Trim the chrome and
+  drop the secondary half of the longest label instead of scrolling the rail.
+*/
+@media (max-width: 560px) {
+  .tab {
+    padding: var(--u3) var(--u1);
+    letter-spacing: var(--track);
+  }
+
+  .tab-long {
+    display: none;
+  }
+
+  .masthead-rev {
+    display: none;
+  }
+
+}
+
+/*
+  The wordmark is the one thing that must survive the squeeze: "MAESTRO" alone
+  does not say whose panel this is. Buy its width back in two stages instead —
+  first the action labels, which are recoverable from their tooltips, then the
+  wordmark'''s own size. Each threshold is where the previous layout stops fitting.
+*/
+@media (max-width: 500px) {
+  .btn-label {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .masthead {
+    padding: var(--u3);
+  }
+
+  .masthead-title {
+    font-size: 13px;
+    letter-spacing: -0.03em;
+  }
+
+  .icon-btn {
+    padding: var(--u2);
+  }
+}
+
+/* ── Panels ───────────────────────────────────────────────────────────────── */
+
+.panel {
+  display: none;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.panel.active {
+  display: flex;
+}
+
+.panel-body {
+  padding: var(--u4);
+  display: grid;
+  /* Without this, any wide child (a table, a long id) widens the whole panel. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--u4);
+}
+
+/* ── Section headers ──────────────────────────────────────────────────────── */
+
+/*
+  Flex, not a `1fr auto` grid: the `auto` track sizes to the meta line's
+  max-content and will not shrink, which pushed the whole panel wider than a
+  narrow sidebar viewport. Wrapping puts the meta on its own line instead.
+*/
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--u1) var(--u3);
+  border-bottom: var(--hairline);
+  padding-bottom: var(--u2);
+}
+
+.section-title {
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0;
+}
+
+.section-meta {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+/* ── Search & filters ─────────────────────────────────────────────────────── */
+
+.controls {
+  border-bottom: var(--hairline);
+  background: var(--bg-panel);
+  position: sticky;
+  top: 87px;
+  z-index: 18;
+}
+
+.search-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  border-bottom: var(--hairline-faint);
+}
+
+.search-sigil {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  color: var(--fg-faint);
+  padding: 0 var(--u3);
+  user-select: none;
+}
+
+.search-input {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--data);
+  padding: var(--u3) 0;
+  width: 100%;
+}
+
+.search-input::placeholder {
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+  font-size: var(--micro-lg);
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-row:focus-within {
+  box-shadow: inset 2px 0 0 var(--hazard);
+}
+
+.search-clear {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: var(--data);
+  padding: 0 var(--u3);
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.search-clear.visible {
+  visibility: visible;
+}
+
+.search-clear:hover {
+  color: var(--hazard-bright);
+  background: var(--hazard-wash);
+}
+
+/*
+  Same outline hairlines as the card grids: when the row wraps, the leftover
+  space on a line must read as panel, not as an exposed strip of rule color.
+*/
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--bg-panel);
+}
+
+.filter-row > * {
+  outline: 1px solid var(--rule-faint);
+}
+
+.chip {
+  appearance: none;
+  border: 0;
+  background: var(--bg-panel);
+  color: var(--fg-faint);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u2) var(--u3);
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.chip:hover:not(.active) {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  outline-color: var(--hazard-edge);
+}
+
+.chip:active {
+  background: var(--press);
+}
+
+.chip.active:hover {
+  background: var(--hazard-bright);
+}
+
+.chip.active {
+  background: var(--hazard);
+  color: var(--fg-inverse);
+  font-weight: 600;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+.select {
+  appearance: none;
+  border: 0;
+  background: var(--bg-panel);
+  color: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u2) var(--u3);
+  cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+}
+
+.select:hover {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  outline-color: var(--hazard-edge);
+}
+
+.select:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+
+.btn {
+  appearance: none;
+  border: var(--hairline);
+  border-bottom-color: var(--rule-strong);   /* resting keyline: this is a key */
+  background: var(--bg-inset);
+  color: var(--fg-dim);
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  padding: var(--u2) var(--u3);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-fast), background var(--t-fast), border-color var(--t-fast);
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--hazard-wash);
+  color: var(--fg);
+  border-color: var(--hazard-edge);
+}
+
+.btn:active:not(:disabled) {
+  background: var(--press);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--hazard);
+  outline-offset: -2px;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--hazard);
+  border-color: var(--hazard);
+  color: var(--fg-inverse);
+  font-weight: 600;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--hazard-bright);
+  border-color: var(--hazard-bright);
+  color: var(--fg-inverse);
+}
+
+.btn-danger:hover:not(:disabled) {
+  color: var(--hazard-bright);
+  border-color: var(--hazard-edge);
+}
+
+/*
+  Disabled is not "the same key, dimmed" -- it must not read as pressable at
+  all, so the resting keyline goes with it.
+*/
+.btn:disabled {
+  border-bottom-color: var(--rule);
+}
+
+/* ── Empty states ─────────────────────────────────────────────────────────── */
+
+.empty {
+  border: var(--hairline);
+  padding: var(--u8) var(--u4);
+  text-align: center;
+  display: grid;
+  gap: var(--u3);
+  justify-items: center;
+}
+
+.empty-sigil {
+  font-family: var(--font-mono);
+  font-size: var(--micro);
+  letter-spacing: var(--track-wide);
+  color: var(--hazard);
+  text-transform: uppercase;
+}
+
+.empty-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.empty-desc {
+  font-size: var(--data);
+  color: var(--fg-dim);
+  max-width: 46ch;
+  line-height: 1.6;
+}
+
+/* ── Toasts ───────────────────────────────────────────────────────────────── */
+
+.toasts {
+  position: fixed;
+  right: var(--u4);
+  bottom: var(--u4);
+  z-index: 1000;
+  display: grid;
+  gap: var(--u2);
+  max-width: min(420px, calc(100vw - var(--u8)));
+}
+
+.toast {
+  border: var(--hairline);
+  border-left: 3px solid var(--fg-faint);
+  background: var(--bg-raised);
+  padding: var(--u3);
+  font-size: var(--data);
+  line-height: 1.5;
+  color: var(--fg);
+  transition: opacity var(--t-base), transform var(--t-base);
+}
+
+.toast.success {
+  border-left-color: var(--signal);
+}
+
+.toast.error {
+  border-left-color: var(--hazard);
+}
+
+/* ── Loading overlay ──────────────────────────────────────────────────────── */
+
+.loading {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+}
+
+.loading.visible {
+  display: flex;
+}
+
+.loading-text {
+  font-family: var(--font-mono);
+  font-size: var(--micro-lg);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  border: var(--hairline);
+  padding: var(--u4) var(--u6);
+}
+
+/* A mechanical, discrete tick — not an organic fade. */
+@keyframes tick {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+.loading-text::after {
+  content: ' ███';
+  animation: tick 700ms steps(1, end) infinite;
+}
+
+/* ── Utility ──────────────────────────────────────────────────────────────── */
+
+.hidden {
+  display: none !important;
+}
+
+.scroll-x {
+  overflow-x: auto;
+}
