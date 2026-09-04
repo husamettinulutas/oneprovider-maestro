@@ -144,8 +144,8 @@ OneProvider natively speaks the **Anthropic Messages API** (`POST https://api.on
 {
   "env": {
     "ANTHROPIC_BASE_URL": "https://api.oneprovider.dev",
-    "ANTHROPIC_API_KEY": "sk-…",                        // your OneProvider key
-    "ANTHROPIC_AUTH_TOKEN": "",                         // explicitly empty — blocks fallback auth
+    "ANTHROPIC_AUTH_TOKEN": "sk-…",                      // your OneProvider key
+    "ANTHROPIC_API_KEY": "",                            // explicitly empty — see below
     "ANTHROPIC_MODEL": "claude-opus-5",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "claude-opus-5",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "claude-opus-5",
@@ -164,7 +164,7 @@ OneProvider natively speaks the **Anthropic Messages API** (`POST https://api.on
 
 A few details worth knowing:
 
-- `ANTHROPIC_AUTH_TOKEN` is set to empty on purpose. An inherited bearer token from another gateway would otherwise take precedence and be sent to OneProvider.
+- **The key goes in `ANTHROPIC_AUTH_TOKEN`, and `ANTHROPIC_API_KEY` is cleared.** Both headers reach OneProvider — its `/v1/messages` accepts `Authorization: Bearer` and `x-api-key` alike — but Claude Code treats a value in `ANTHROPIC_API_KEY` as a *custom* API key that must be approved before use, recording the answer in `~/.claude.json` under `customApiKeyResponses`. Launched from an IDE panel there is nowhere to answer that prompt, so Claude Code falls back to its stored OAuth session and reports *"OAuth session expired and could not be refreshed"* without ever calling the gateway. `ANTHROPIC_AUTH_TOKEN` carries no such gate.
 - The context and output caps are declared from the model's real limits. Claude Code otherwise assumes a Claude-sized window and reserves 64k output on every request, which a prepaid gateway can refuse outright.
 - A top-level `"model"` key shadows `ANTHROPIC_MODEL`. Claude Code's own `/model` picker writes it; activation removes it and restore puts it back.
 
@@ -265,6 +265,8 @@ Restore also removes the `ONEPROVIDER_API_KEY` user variable if Maestro created 
 **404 on a model** — you probably picked a `CATALOG ONLY` entry. Sync the catalog and use the **Key only** filter.
 
 **Claude Code still answers as the old model** — a running session keeps the config it started with. Reload the window and start a fresh session; a CLI in a terminal has to be restarted itself.
+
+**Claude Code says "OAuth session expired and could not be refreshed"** — it is using its own Anthropic login instead of the gateway. Check that `~/.claude/settings.json` has `env.ANTHROPIC_AUTH_TOKEN` set to your key and `env.ANTHROPIC_API_KEY` empty (Maestro writes it that way; a key in `ANTHROPIC_API_KEY` needs an approval Claude Code cannot ask for from a panel). Then re-activate the model and start a fresh session.
 
 **Codex says `ONEPROVIDER_API_KEY` is missing** — restart VS Code once after the first activation, so the process inherits the new user variable.
 

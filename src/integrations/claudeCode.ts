@@ -202,11 +202,24 @@ export class ClaudeCodeIntegration implements AgentIntegration {
       .trim();
 
     env.ANTHROPIC_BASE_URL = baseUrl;
-    // OneProvider's own guide uses ANTHROPIC_API_KEY (x-api-key auth). Clear
-    // ANTHROPIC_AUTH_TOKEN explicitly — an inherited bearer token from another
-    // gateway would otherwise take precedence and be sent to OneProvider.
-    env.ANTHROPIC_API_KEY = apiKey;
-    env.ANTHROPIC_AUTH_TOKEN = '';
+    /*
+      The credential goes in ANTHROPIC_AUTH_TOKEN, not ANTHROPIC_API_KEY.
+
+      Both reach OneProvider fine — its /v1/messages endpoint answers
+      "Invalid API key" to either "Authorization: Bearer" or "x-api-key", and
+      "API key is required" to neither — but Claude Code treats a value in
+      ANTHROPIC_API_KEY as a *custom* API key the user has to approve before it
+      is used, recording the answer in ~/.claude.json under
+      customApiKeyResponses. Launched from an IDE panel there is nowhere to
+      answer that prompt, so Claude Code falls back to its stored OAuth session
+      and reports "OAuth session expired and could not be refreshed" instead of
+      ever calling the gateway. ANTHROPIC_AUTH_TOKEN carries no such gate.
+
+      ANTHROPIC_API_KEY is then cleared explicitly, so a key left behind by
+      another gateway cannot re-arm that prompt.
+    */
+    env.ANTHROPIC_AUTH_TOKEN = apiKey;
+    env.ANTHROPIC_API_KEY = '';
     env.ANTHROPIC_MODEL = modelId;
     env.ANTHROPIC_DEFAULT_OPUS_MODEL = modelId;
     env.ANTHROPIC_DEFAULT_SONNET_MODEL = modelId;
@@ -256,8 +269,8 @@ export class ClaudeCodeIntegration implements AgentIntegration {
         'claudeCode.environmentVariables',
         [
           { name: 'ANTHROPIC_BASE_URL', value: baseUrl },
-          { name: 'ANTHROPIC_API_KEY', value: apiKey },
-          { name: 'ANTHROPIC_AUTH_TOKEN', value: '' },
+          { name: 'ANTHROPIC_AUTH_TOKEN', value: apiKey },
+          { name: 'ANTHROPIC_API_KEY', value: '' },
         ],
         vscode.ConfigurationTarget.Global,
       );

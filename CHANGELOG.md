@@ -15,7 +15,8 @@ First release.
 - Sets `chat.byokUtilityModelDefault` to `mainAgent` on first run unless the user configured it, avoiding Copilot's "No utility model is configured" failure.
 
 ### Claude Code
-- Wires `ANTHROPIC_BASE_URL` / `ANTHROPIC_API_KEY` and the model env vars into `~/.claude/settings.json` (or the project-scoped `settings.local.json`).
+- Wires `ANTHROPIC_BASE_URL` / `ANTHROPIC_AUTH_TOKEN` and the model env vars into `~/.claude/settings.json` (or the project-scoped `settings.local.json`).
+- The credential goes in `ANTHROPIC_AUTH_TOKEN` rather than `ANTHROPIC_API_KEY`. Both authenticate against OneProvider, but Claude Code gates `ANTHROPIC_API_KEY` behind an approval prompt it cannot show from an IDE panel, and falls back to its stored OAuth session instead — surfacing as "OAuth session expired and could not be refreshed" rather than any gateway error.
 - Mirrors the credential into VS Code's `claudeCode.environmentVariables` and sets `claudeCode.disableLoginPrompt`, which the Claude Code extension checks before launching.
 - Declares the model's real context window and output cap so auto-compaction fires correctly and a prepaid balance is not blocked by an oversized reservation.
 - Only Claude models are offered — OneProvider routes everything else over its OpenAI-compatible wire, which Claude Code cannot speak.
